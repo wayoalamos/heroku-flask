@@ -1,18 +1,24 @@
-from flask import Flask
-from datetime import datetime
+from flask import Flask, Response
 app = Flask(__name__)
 
-@app.route('/')
-def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+@app.route("/")
+def hello():
+    return '''
+        <html><body>
+        Hellssssso. <a href="/getPlotCSV">Click me.</a>
+        </body></html>
+        '''
 
-    return """
-    <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
+@app.route("/getPlotCSV")
+def getPlotCSV():
+    # with open("outputs/Adjacency.csv") as fp:
+    #     csv = fp.read()
+    csv = '1,2,3\n4,5,6\n'
+    return Response(
+        csv,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=myplot.csv"})
 
-    <img src="http://loremflickr.com/600/400" />
-    """.format(time=the_time)
 
-if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
-
+app.run(debug=True)
