@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 from datetime import datetime
 app = Flask(__name__)
 
@@ -18,7 +18,12 @@ def homepage():
 def getPlotCSV():
     # with open("outputs/Adjacency.csv") as fp:
     #     csv = fp.read()
-    return "<p> tjos </p>"
+    csv = '1,2,3\n4,5,6\n'
+    return Response(
+        csv,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=portalDs.csv"})
 
 
 
