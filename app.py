@@ -18,12 +18,7 @@ def homepage():
 def getPlotCSV():
     # with open("outputs/Adjacency.csv") as fp:
     #     csv = fp.read()
-    csv = '1,2,3\n4,5,6\n'
-    return Response(
-        csv,
-        mimetype="text/csv",
-        headers={"Content-disposition":
-                 "attachment; filename=portalDs.csv"})
+    return "<p> tjos </p>"
 
 
 
